@@ -7,7 +7,7 @@
 int _printf(const char *format, ...)
 {
 	va_list ap;
-	int i = 0, j = 0, len = 0;
+	int i = 0, j = 0;
 	char *dest, *argstr;
 
 	dest = malloc(sizeof(char) * 1500);
@@ -22,20 +22,20 @@ int _printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-			//%c case
+			/**
+			 *  %c case
+			 */
 			if (format[i] == 'c')
 			{
 				dest[j] = (char)va_arg(ap, int);
 				j++;
 			}
-			// %s case
 			else if (format[i] == 's')
 			{
 				argstr = va_arg(ap, char *);
 				_strcpy(&dest[j], argstr);
 				j += _strlen(argstr);
 			}
-			// %% case
 			else if (format[i] == '%')
 			{
 				dest[j] = '%';
