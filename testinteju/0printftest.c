@@ -1,4 +1,7 @@
 #include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include "main.h"
 
 int _printf(const char *format, ...)
@@ -7,10 +10,10 @@ int _printf(const char *format, ...)
 	int i = 0, j = 0, len = 0;
 	char *dest, *argstr;
 
-	while (format[len] != '\0')
-		len++;
-
 	dest = malloc(sizeof(char) * 1500);
+
+	if (dest == NULL)
+		return (1);
 
 	va_start(ap, format);
 	while (format[i] != '\0')
@@ -20,33 +23,37 @@ int _printf(const char *format, ...)
 		{
 			i++;
 			//%c case
-			if (format[i] == '%' && format[i + 1] == 'c')
+			if (format[i] == 'c')
 			{
-				i++;
 				dest[j] = (char)va_arg(ap, int);
 				j++;
 			}
 			// %s case
-			else if (format[i] == '%' && format[i + 1] == 's')
+			else if (format[i] == 's')
 			{
-
 				argstr = va_arg(ap, char *);
 				_strcpy(&dest[j], argstr);
 				j += _strlen(argstr);
 			}
-			else
+			// %% case
+			else if (format[i] == '%')
 			{
-				dest[j] = format[i];
+				dest[j] = '%';
 				j++;
 			}
-			i++;
 		}
-
-		write(1, dest, i);
-		va_end(ap);
-		free(dest);
-		return (i);
+		else
+		{
+			dest[j] = format[i];
+			j++;
+		}
+		i++;
 	}
+
+	write(1, dest, j);
+	va_end(ap);
+	free(dest);
+	return (j);
 }
 
 int main(void)
