@@ -47,16 +47,17 @@ int _printf(const char *format, ...)
 				num2 = va_arg(ap, int);
 				_printnum(num2);
 			}
-			else
-			{
-				dest[j] = format[i];
-				j++;
-			}
-			i++;
 		}
-
-		write(1, dest, j);
-		va_end(ap);
-		free(dest);
-		return (j);
+		else
+		{
+			dest[j] = format[i];
+			j++;
+		}
+		i++;
 	}
+
+	write(1, dest, j);
+	va_end(ap);
+	free(dest);
+	return (j);
+}
