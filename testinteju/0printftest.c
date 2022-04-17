@@ -43,9 +43,37 @@ int _printf(const char *format, ...)
 			}
 			else if (format[i] == 'd')
 			{
-				dest[j] = '%';
+				dest[j] = (char)va_arg(ap, int);
 				j++;
-				dest[j] = 'd';
+			}
+			else if (format[i] == 'u')
+			{
+				dest[j] = (char)va_arg(ap, unsigned int);
+				j++;
+			}
+			else if (format[i] == 'o')
+			{
+				dest[j] = (char)va_arg(ap, unsigned int);
+				j++;
+			}
+			else if (format[i] == 'x')
+			{
+				dest[j] = (char)va_arg(ap, unsigned int);
+				j++;
+			}
+			else if (format[i] == 'X')
+			{
+				dest[j] = (char)va_arg(ap, unsigned int);
+				j++;
+			}
+			else if (format[i] == 'r')
+			{
+				dest[j] = (char)va_arg(ap, int);
+				j++;
+			}
+			else
+			{
+				dest[j] = format[i];
 				j++;
 			}
 		}
