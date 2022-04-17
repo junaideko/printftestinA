@@ -7,8 +7,9 @@
 int _printf(const char *format, ...)
 {
 	va_list ap;
-	int i = 0, j = 0, num;
+	int i = 0, j = 0;
 	char *dest, *argstr;
+	unsigned int num2;
 
 	dest = malloc(sizeof(char) * 1500);
 
@@ -43,25 +44,19 @@ int _printf(const char *format, ...)
 			}
 			else if (format[i] == 'd')
 			{
-				num = va_arg(ap, int);
-				if (num < 0)
-				{
-					dest[j] = '-';
-					j++;
-					num = -num;
-				}
+				num2 = va_arg(ap, int);
+				_printnum(num2);
 			}
+			else
+			{
+				dest[j] = format[i];
+				j++;
+			}
+			i++;
 		}
-		else
-		{
-			dest[j] = format[i];
-			j++;
-		}
-		i++;
-	}
 
-	write(1, dest, j);
-	va_end(ap);
-	free(dest);
-	return (j);
-}
+		write(1, dest, j);
+		va_end(ap);
+		free(dest);
+		return (j);
+	}
