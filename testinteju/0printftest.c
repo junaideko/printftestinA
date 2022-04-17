@@ -41,6 +41,13 @@ int _printf(const char *format, ...)
 				dest[j] = '%';
 				j++;
 			}
+			else if (format[i] == 'd')
+			{
+				dest[j] = '%';
+				j++;
+				dest[j] = 'd';
+				j++;
+			}
 		}
 		else
 		{
