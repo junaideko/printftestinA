@@ -7,7 +7,7 @@
 int _printf(const char *format, ...)
 {
 	va_list ap;
-	int i = 0, j = 0;
+	int i = 0, j = 0, num;
 	char *dest, *argstr;
 
 	dest = malloc(sizeof(char) * 1500);
@@ -43,7 +43,13 @@ int _printf(const char *format, ...)
 			}
 			else if (format[i] == 'd')
 			{
-				j += _printnum(va_arg(ap, int));
+				num = va_arg(ap, int);
+				if (num < 0)
+				{
+					dest[j] = '-';
+					j++;
+					num = -num;
+				}
 			}
 		}
 		else
