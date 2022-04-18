@@ -1,15 +1,14 @@
 #include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include "main.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 int _printf(const char *format, ...)
 {
 	va_list ap;
 	int i = 0, j = 0, total = 0, d;
 	char *dest, *argstr;
-	unsigned int num2;
 
 	dest = malloc(sizeof(char) * 1500);
 
@@ -45,7 +44,7 @@ int _printf(const char *format, ...)
 			else if (format[i] == 'd' || format[i] == 'i')
 			{
 				d = va_arg(ap, int);
-				total += _printnum(d);
+				total += print_int(d);
 			}
 		}
 		else

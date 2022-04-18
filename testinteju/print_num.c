@@ -1,15 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 
-int _printnum(int n)
+int print_int(int n)
 {
     int i, len = 1, num, total = 0;
     char c;
 
     if (n < 0)
     {
-        write(1, '-', 1);
+        putchar('-');
         total++;
-        n *= -1;
+        n *= 1;
     }
     num = n;
 
@@ -21,10 +23,10 @@ int _printnum(int n)
 
     while (i >= 0)
     {
-        c = d / len + '0';
-        write(1, &c, 1)
+        c = n / len + '0';
+        write(1, &c, 1);
             total++;
-        d %= len;
+        n %= len;
         len /= 10;
         i--;
     }
