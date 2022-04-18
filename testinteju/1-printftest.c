@@ -1,6 +1,11 @@
 #include <unistd.h>
 #include "main.h"
 #include <stdarg.h>
+/**
+ * _printf - prints data according to a format
+ * @format: format string
+ * Return: number of characters printed
+ */
 
 int _printf(const char *format, ...)
 {
