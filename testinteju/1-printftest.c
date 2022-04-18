@@ -9,11 +9,9 @@
 
 int _printf(const char *format, ...)
 {
-    int i, j, d;
-    int total = 0;
+	int i, j, d, total = 0;
     va_list args;
-    char c, f;
-    char *s;
+    char c, f, *s;
 
     va_start(args, format);
     for (i = 0; format[i] != '\0'; i++)
@@ -21,18 +19,17 @@ int _printf(const char *format, ...)
         if (format[i] == '%')
         {
             i++;
-            f = format[i];
-            if (f == '%')
+            if (format[i] == '%')
             {
                 write(1, "%", 1);
                 total++;
             }
-            else if (f == 'd' || f == 'i')
+            else if (format[i] == 'd' || f == 'i')
             {
                 d = va_arg(args, int);
                 total += print_int(d);
             }
-            else if (f == 's')
+            else if (format[i] == 's')
             {
                 s = va_arg(args, char *);
                 for (j = 0; s[j] != '\0'; j++)
@@ -41,7 +38,7 @@ int _printf(const char *format, ...)
                     total++;
                 }
             }
-            else if (f == 'c')
+            else if (format[i] == 'c')
             {
                 c = va_arg(args, int);
                 write(1, &c, 1);
@@ -55,5 +52,5 @@ int _printf(const char *format, ...)
         }
     }
     va_end(args);
-    return total;
+    return (total);
 }
