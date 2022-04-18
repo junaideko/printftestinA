@@ -1,22 +1,32 @@
-#include "main.h"
-#include <stdio.h>
+#include <unistd.h>
 
 int _printnum(int n)
 {
-    unsigned int num;
+    int i, len = 1, num, total = 0;
+    char c;
 
     if (n < 0)
     {
-        _putchar('-');
-        num = n * -1;
+        write(1, '-', 1);
+        total++;
+        n *= -1;
     }
-    else
+    num = n;
+
+    for (i = 0; num > 9; i++)
     {
-        num = n;
+        len *= 10;
+        num /= 10;
     }
-    if (num / 10)
+
+    while (i >= 0)
     {
-        _printnum(num / 10);
-        _putchar((num % 10) + '0');
+        c = d / len + '0';
+        write(1, &c, 1)
+            total++;
+        d %= len;
+        len /= 10;
+        i--;
     }
+    return total;
 }
