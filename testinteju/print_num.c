@@ -1,19 +1,18 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 
-int print_int(int n)
+int print_int(int d)
 {
     int i, len = 1, num, total = 0;
     char c;
 
-    if (n < 0)
+    if (d < 0)
     {
-        putchar('-');
+        write(1, "-", 1);
         total++;
-        n *= 1;
+        d *= -1;
     }
-    num = n;
+
+    num = d;
 
     for (i = 0; num > 9; i++)
     {
@@ -23,10 +22,10 @@ int print_int(int n)
 
     while (i >= 0)
     {
-        c = n / len + '0';
+        c = d / len + '0';
         write(1, &c, 1);
-            total++;
-        n %= len;
+        total++;
+        d %= len;
         len /= 10;
         i--;
     }
