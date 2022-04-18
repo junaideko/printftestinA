@@ -7,7 +7,7 @@
 int _printf(const char *format, ...)
 {
 	va_list ap;
-	int i = 0, j = 0;
+	int i = 0, j = 0, total = 0, d;
 	char *dest, *argstr;
 	unsigned int num2;
 
@@ -42,10 +42,10 @@ int _printf(const char *format, ...)
 				dest[j] = '%';
 				j++;
 			}
-			else if (format[i] == 'd')
+			else if (format[i] == 'd' || format[i] == 'i')
 			{
-				num2 = va_arg(ap, int);
-				_printnum(num2);
+				d = va_arg(ap, int);
+				total += _printnum(d);
 			}
 		}
 		else
